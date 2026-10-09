@@ -8,16 +8,7 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    .login-bg { background-size: cover; background-position: center top; background-repeat: no-repeat; height: 100vh; height: 100dvh; overflow: hidden; }
-    @media (max-height: 700px) {
-      .login-title { font-size: 1.5rem !important; margin-top: .25rem !important; }
-      .login-card { padding: .625rem !important; gap: .5rem !important; }
-      .login-card form { gap: .5rem !important; }
-      .login-card input, .login-card select { padding: .375rem !important; }
-      .login-card label { margin-bottom: .125rem !important; }
-    }
-  </style>
+  <style>body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }</style>
 </head>
 <body>
   <div id="root"></div>
@@ -164,7 +155,7 @@
       const [quizIndex, setQuizIndex] = useState(0);
 
       // --- 後台資料庫 (Google Apps Script) 追蹤狀態 ---
-      const GAS_WEB_APP_URL = '請貼上您的_Google_Apps_Script_部署網址'; // <--- ★ 部署時，請將您發布的 GAS 網址貼在這裡 ★
+      const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzQMYtfsIWn3uqBeDFqyV7u-qRdz4AJwXPQ39DjasMt59jkCbACHyavmvTReJn_EFIr/exec'; // <--- ★ 部署時，請將您發布的 GAS 網址貼在這裡 ★
       const [sessionStartTime, setSessionStartTime] = useState(Date.now());
       const [sessionScore, setSessionScore] = useState(0);
 
@@ -314,37 +305,41 @@
       };
 
       return (
-        <div className="login-bg flex flex-col justify-end items-center px-4 pt-4 gap-3" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))', backgroundColor: '#e8471f', backgroundImage: `url(${COVER_IMG})` }}>
-          <div className="text-center">
-            <span className="bg-[#fde047] border-2 border-black text-xs font-black px-3 py-1 rounded-full shadow-[2px_2px_0_0_#000]">LESSON 4</span>
-            <h2 className="login-title text-3xl font-black text-white leading-tight mt-2" style={{ textShadow: '0 2px 6px rgba(0,0,0,.85), 0 0 2px #000' }}>Day of the Dead</h2>
-            <p className="text-sm font-bold text-white mt-1" style={{ textShadow: '0 2px 6px rgba(0,0,0,.85)' }}>A Joyous Celebration of Death</p>
-          </div>
-          <BrutalContainer className="login-card bg-white/90 backdrop-blur-sm w-full max-w-sm p-4 flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-black italic text-indigo-600 leading-none">VOCAB<span className="text-pink-500">POP</span></h1>
-              <h3 className="font-bold text-gray-500 tracking-wider text-xs">STUDENT LOGIN</h3>
+        <div
+          className="min-h-screen flex items-center justify-center p-4"
+          style={{ backgroundColor: '#e8471f', backgroundImage: `url(${COVER_IMG})`, backgroundSize: 'cover', backgroundPosition: 'center top', backgroundRepeat: 'no-repeat' }}
+        >
+          <BrutalContainer className="bg-white/95 w-full max-w-sm p-8 flex flex-col items-center gap-5">
+            <div className="text-center">
+              <span className="bg-[#fde047] border-2 border-black text-xs font-black px-3 py-1 rounded-full shadow-[2px_2px_0_0_#000]">LESSON 4</span>
+              <h2 className="text-4xl font-black text-orange-600 leading-tight mt-3">Day of the Dead</h2>
+              <p className="text-sm font-bold text-gray-600 mt-1">A Joyous Celebration of Death</p>
             </div>
-            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-3">
-              <div className="flex gap-3">
+            <div className="text-center">
+              <h1 className="text-3xl font-black italic text-indigo-600 mb-1">VOCAB<span className="text-pink-500">POP</span></h1>
+              <h3 className="font-bold text-gray-500 tracking-wider text-sm">STUDENT LOGIN</h3>
+            </div>
+
+            <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+              <div className="flex gap-4">
                 <div className="flex-1">
-                  <label className="block font-bold text-xs mb-1 text-gray-700">CLASS (班級) *</label>
-                  <select value={classNum} onChange={e => setClassNum(e.target.value)} className="w-full border-2 border-black rounded-lg p-2 font-bold bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                  <label className="block font-bold text-sm mb-1 text-gray-700">CLASS (班級) *</label>
+                  <select value={classNum} onChange={e => setClassNum(e.target.value)} className="w-full border-2 border-black rounded-lg p-3 font-bold bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400">
                     <option value="208">208</option>
                     <option value="211">211</option>
                     <option value="216">216</option>
                   </select>
                 </div>
                 <div className="flex-1">
-                  <label className="block font-bold text-xs mb-1 text-gray-700">NO. (座號) *</label>
-                  <input type="number" placeholder="e.g. 15" required value={seatNum} onChange={e => setSeatNum(e.target.value)} className="w-full border-2 border-black rounded-lg p-2 font-bold outline-none focus:ring-2 focus:ring-indigo-400" />
+                  <label className="block font-bold text-sm mb-1 text-gray-700">NO. (座號) *</label>
+                  <input type="number" placeholder="e.g. 15" required value={seatNum} onChange={e => setSeatNum(e.target.value)} className="w-full border-2 border-black rounded-lg p-3 font-bold outline-none focus:ring-2 focus:ring-indigo-400" />
                 </div>
               </div>
               <div>
-                <label className="block font-bold text-xs mb-1 text-gray-700">NAME (姓名) *</label>
-                <input type="text" placeholder="e.g. 王小明" required value={name} onChange={e => setName(e.target.value)} className="w-full border-2 border-black rounded-lg p-2 font-bold outline-none focus:ring-2 focus:ring-indigo-400" />
+                <label className="block font-bold text-sm mb-1 text-gray-700">NAME (姓名) *</label>
+                <input type="text" placeholder="e.g. 王小明" required value={name} onChange={e => setName(e.target.value)} className="w-full border-2 border-black rounded-lg p-3 font-bold outline-none focus:ring-2 focus:ring-indigo-400" />
               </div>
-              <BrutalButton type="submit" className="bg-[#6366f1] text-white py-3 mt-1 text-lg tracking-wide flex justify-center items-center gap-2">
+              <BrutalButton type="submit" className="bg-[#6366f1] text-white py-4 mt-2 text-xl tracking-wide flex justify-center items-center gap-2">
                 START JOURNEY <span className="text-2xl leading-none">→</span>
               </BrutalButton>
             </form>
